@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+
+import FormNote from './components/FormNote'
+import ListCategories from './components/ListCategories'
+import ListNote from './components/ListNote'
+
+import './components/style.css'
 
 function App() {
+  const [categories, setCategories] = useState([])
+  const [notes, setNotes] = useState([])
+
+  const createCategory = (name) => {
+    const newCategories = [...categories, name]
+    setCategories(newCategories)
+  }
+
+  const createNote = (category, title, text) => {
+    const note = { category, title, text }
+    const newNote = [...notes, note]
+    setNotes(newNote)
+  }
+
+  const deleteNote = (index) => {
+    const newNotes = notes.filter((note, i) => index !== i)
+    setNotes(newNotes)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <section className="content">
+      <FormNote categories={categories} createNote={createNote} />
+      <main className="main-content">
+        <ListCategories
+          categories={categories}
+          createCategory={createCategory}
+        />
+        <ListNote notes={notes} deleteNote={deleteNote} />
+      </main>
+    </section>
+  )
 }
 
-export default App;
+export default App
