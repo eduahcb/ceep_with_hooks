@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 
 import deleteIcon from '../assets/delete.svg'
 
-const CardNote = ({ index, category, title, text, deleteNote }) => {
+import { useDataContext } from '../context/AppContext'
+
+const CardNote = ({ index, category, title, text }) => {
+  const { deleteNote } = useDataContext()
+
   const handleDeleteNote = () => {
     deleteNote(index)
   }
@@ -31,7 +35,6 @@ CardNote.propTypes = {
   category: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
-  deleteNote: PropTypes.func,
 }
 
 export default CardNote

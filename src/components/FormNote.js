@@ -1,21 +1,24 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import { useDataContext } from '../context/AppContext'
 
-const FormNote = ({ categories, createNote }) => {
+const FormNote = () => {
   const [category, setCategory] = useState('Sem categoria')
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
+
+  const { categories, createNote } = useDataContext()
 
   const handleCreateNote = async (e) => {
     e.preventDefault()
 
     if (title === '' || text === '') return
-    console.log(category)
+
     createNote(category, title, text)
     clearForm()
   }
 
   const clearForm = () => {
+    setCategory('Sem categoria')
     setTitle('')
     setText('')
   }
@@ -56,11 +59,6 @@ const FormNote = ({ categories, createNote }) => {
       </div>
     </form>
   )
-}
-
-FormNote.propTypes = {
-  categories: PropTypes.array,
-  createNote: PropTypes.func,
 }
 
 export default FormNote

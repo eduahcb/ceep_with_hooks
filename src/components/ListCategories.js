@@ -1,7 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const ListCategories = ({ categories, createCategory }) => {
+import { useDataContext } from '../context/AppContext'
+
+const ListCategories = () => {
+  const { categories, createCategory } = useDataContext()
+
   const handleCreateCategory = (e) => {
     if (e.key !== 'Enter') return
 
@@ -26,11 +29,6 @@ const ListCategories = ({ categories, createCategory }) => {
       />
     </section>
   )
-}
-
-ListCategories.propTypes = {
-  categories: PropTypes.array,
-  createCategory: PropTypes.func,
 }
 
 export default ListCategories

@@ -1,8 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import CardNote from './CardNote'
 
-const ListNote = ({ notes, deleteNote }) => {
+import { useDataContext } from '../context/AppContext'
+
+const ListNote = () => {
+  const { notes } = useDataContext()
+
   return (
     <ul className="list">
       {notes.map((note, index) => (
@@ -12,17 +15,11 @@ const ListNote = ({ notes, deleteNote }) => {
             category={note.category}
             title={note.title}
             text={note.text}
-            deleteNote={deleteNote}
           />
         </li>
       ))}
     </ul>
   )
-}
-
-ListNote.propTypes = {
-  notes: PropTypes.array,
-  deleteNote: PropTypes.func,
 }
 
 export default ListNote
